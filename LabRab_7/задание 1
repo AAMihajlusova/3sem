@@ -1,0 +1,102 @@
+package sample;
+
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.*;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import java.util.ArrayList;
+
+
+public class Main extends Application {
+    static ArrayList<String> answers=new ArrayList<>(1);
+    static  double D;
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Label labelG = new Label("Введите коэффиценты, при этом первый коэффицент не должен быть равен нулю:");
+        labelG.setAlignment(Pos.BASELINE_CENTER);
+        labelG.setMaxWidth(Double.MAX_VALUE);
+        TextField a = new TextField();
+        a.setMaxWidth(50);
+        Label label1 = new Label("x^2+");
+        TextField b = new TextField();
+        b.setMaxWidth(50);
+        Label label2 = new Label("x+");
+        TextField c = new TextField();
+        c.setMaxWidth(50);
+        Label label3 = new Label("=0");
+        Text answer = new Text();
+        Text disk = new Text();
+        Button addBtn = new Button("Результат:");
+        HBox button = new HBox(addBtn);
+        HBox equation = new HBox(a, label1, b, label2, c, label3);
+        VBox all = new VBox(25, labelG, equation, answer, disk, button);
+        Scene scene = new Scene(all, 300, 300);
+        primaryStage.setTitle("Решение квадратного уравнения");
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+
+
+        addBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Algo(a, b, c);
+                if (!answers.isEmpty()) {
+                    answer.setText("Корни:" + answers.toString());
+                    disk.setText("D:" + D);
+                    answers.clear();
+                }
+            }
+        });
+    }
+        public static ArrayList Algo(TextField a, TextField b, TextField c) {
+            try {
+                double ax= Double.parseDouble(a.getText());
+                double bx= Double.parseDouble(b.getText());
+                double cx= Double.parseDouble(c.getText());
+                D=bx*bx-(4*ax*cx);
+                if (D == 0) {
+                    answers.add(String.valueOf((-bx + Math.sqrt(D)) / (2 * ax)));
+                }
+                if (D > 0) {
+                    answers.add(String.valueOf((-bx + Math.sqrt(D)) / (2 * ax)));
+                    answers.add(String.valueOf((-bx - Math.sqrt(D)) / (2 * ax)));
+                }
+                if (D < 0) {
+                    String first = String.format("%.2f", -bx / (2 * ax));
+                    String second = String.format("%.2f", Math.sqrt(-D) / (2 * ax));
+                    answers.add(first + "±i" + second);
+                }
+            } catch (NumberFormatException e) {
+                Label errorlabel = new Label("Пустая строка!");
+                Button errorbutton = new Button("Ok");
+
+                Stage errorstage = new Stage();
+                errorstage.setWidth(150);
+                errorstage.setHeight(100);
+                errorstage.setTitle("Ошибка");
+
+                HBox errorhbox=new HBox(errorlabel,errorbutton);
+                Scene errorscene=new Scene(errorhbox,100,100);
+                errorstage.setScene(errorscene);
+
+                errorstage.show();
+
+                errorbutton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        errorstage.close();
+                    }});
+            }
+            return answers;
+        }}
