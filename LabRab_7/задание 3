@@ -1,0 +1,72 @@
+package sample;
+
+import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.collections.ObservableList;
+import javafx.scene.text.Text;
+import javafx.collections.FXCollections;
+import javafx.geometry.Orientation;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        ObservableList<String> kto = FXCollections.observableArrayList("Кузнечик", "Вася", "Крокодил", "Орел", "Трактор", "Боинг 747", "Слоник");
+        ComboBox<String> ktoComboBox = new ComboBox<String>(kto);
+        ktoComboBox.setValue("Кузнечик");
+        ObservableList<String> glagol = FXCollections.observableArrayList("ушел", "полетел", "побежал", "залез", "уполз", "упрыгал", "умчался");
+        ComboBox<String> glagolComboBox = new ComboBox<String>(glagol);
+        glagolComboBox.setValue("ушел");
+        ObservableList<String> kuda = FXCollections.observableArrayList("в кусты", "на дискотеку", "домой", "за пивом", "на Чукотку", "по грибы", "на охоту");
+        ComboBox<String> kudaComboBox = new ComboBox<String>(kuda);
+        kudaComboBox.setValue("в кусты");
+        Text Kto = new Text();
+        Text Glagol = new Text();
+        Text Kuda = new Text();
+        ktoComboBox.setOnAction(event -> Kto.setText(ktoComboBox.getValue()));
+        glagolComboBox.setOnAction(event -> Glagol.setText(glagolComboBox.getValue()));
+        kudaComboBox.setOnAction(event -> Kuda.setText(kudaComboBox.getValue()));
+        Button addBtn1 = new Button("Добавить фразу");
+        Button addBtn2 = new Button("Закрыть");
+        HBox button = new HBox(addBtn1);
+        HBox butten = new HBox(addBtn2);
+        HBox one = new HBox(ktoComboBox, glagolComboBox, kudaComboBox);
+        TextArea textArea=new TextArea();
+        textArea.setMaxSize(300,1000);
+        VBox all = new VBox(25, one, textArea, button, butten);
+        Scene scene = new Scene(all, 400, 300);
+        primaryStage.setTitle("Электронный писатель");
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+        addBtn1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                textArea.setText(textArea.getText()+Kto.getText()+" "+Glagol.getText()+" "+Kuda.getText()+"\n");
+
+            }
+        });
+        addBtn2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Platform.exit();
+            }
+        });
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
