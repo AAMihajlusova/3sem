@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Canvas fx:id="Pole" height="300" layoutX="25.0" layoutY="26.0" width="300" />
+      <Button fx:id="button" layoutX="280.0" layoutY="280.0" mnemonicParsing="false" text="Рисовать" onAction="#click" />
+      <GridPane alignment="center" hgap="10" layoutX="242.0" layoutY="270.0" vgap="10">
+</GridPane>
+   </children>
+</Pane>
