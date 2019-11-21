@@ -1,0 +1,80 @@
+package sample;
+
+import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
+import static javafx.scene.paint.Color.color;
+
+
+import java.util.Random;
+
+import static java.lang.Math.*;
+
+public class Controller {
+    @FXML
+    private Canvas Pole1, Pole2, Pole3, Pole4;
+    @FXML
+    private Button knopa1, knopa2, knopa3, knopa4;
+    @FXML
+    private TextField nachx1, nachy1, konx1, kony1, nachx2, nachy2, width2, height2, x1, y1, x2, y2, x3, y3, nachx3, nachy3, width3, height3;
+    private GraphicsContext gc;
+
+    @FXML
+    private void lineClick()
+    {
+        gc = Pole1.getGraphicsContext2D();
+        int X1 = Integer.parseInt(nachx1.getText());
+        int Y1 = Integer.parseInt(nachy1.getText());
+        int X2 = Integer.parseInt(konx1.getText());
+        int Y2 = Integer.parseInt(kony1.getText());
+        gc.setStroke(color (Math.random(), Math.random(), Math.random(),0.5));
+        gc.strokeLine(X1, Y1, X2, Y2);
+
+    }
+
+    @FXML
+    private void rectClick()
+    {
+        gc = Pole2.getGraphicsContext2D();
+        int X = Integer.parseInt(nachx2.getText());
+        int Y = Integer.parseInt(nachy2.getText());
+        int W = Integer.parseInt(width2.getText());
+        int H = Integer.parseInt(height2.getText());
+        gc.setFill(color (Math.random(), Math.random(),Math.random(),0.5));
+        gc.fillRect(X, Y, W, H);
+    }
+
+    @FXML
+    private void treugClick()
+    {
+        gc = Pole3.getGraphicsContext2D();
+        int X1 = Integer.parseInt(x1.getText());
+        int Y1 = Integer.parseInt(y1.getText());
+        int X2 = Integer.parseInt(x2.getText());
+        int Y2 = Integer.parseInt(y2.getText());
+        int X3 = Integer.parseInt(x3.getText());
+        int Y3 = Integer.parseInt(y3.getText());
+        gc.setFill(color(Math.random(), Math.random(), Math.random(), 0.5));
+        gc.fillPolygon(
+                new double[]{X1, X2, X3},
+                new double[]{Y1, Y2, Y3},
+                3
+        );
+    }
+
+    @FXML
+    private void ovalClick()
+    {
+        gc = Pole4.getGraphicsContext2D();
+        int X = Integer.parseInt(nachx3.getText());
+        int Y = Integer.parseInt(nachy3.getText());
+        int W = Integer.parseInt(width3.getText());
+        int H = Integer.parseInt(height3.getText());
+        gc.setFill(color (Math.random(),Math.random(),Math.random(),0.5));
+        gc.fillOval(X, Y, W, H);
+    }
+
+}
