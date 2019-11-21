@@ -1,0 +1,75 @@
+package sample;
+
+import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import static javafx.scene.paint.Color.color;
+
+
+import java.util.Random;
+
+import static java.lang.Math.*;
+
+
+public class Controller {
+    @FXML
+    private Canvas Pole;
+    @FXML
+    private Button button;
+    private GraphicsContext gc;
+
+    @FXML
+    void click()
+    {
+        Random random = new Random();
+        float r = random.nextFloat();
+        float g = random.nextFloat();
+        float b = random.nextFloat();
+        int figure = (int) (random()*7);
+        gc = Pole.getGraphicsContext2D();
+        if (figure==0)
+        {
+            gc.setFill(color(r, g, b, 0.5));
+            gc.fillOval(Math.random()*100, Math.random()*100, Math.random()*200, Math.random()*200 );
+        }
+        else if (figure==1)
+        {
+            gc.setStroke(color(r, g, b, 0.5));
+            gc.strokeOval(Math.random()*100, Math.random()*100, Math.random()*200, Math.random()*200);
+        }
+        else if (figure==2)
+        {
+            gc.setFill(color(r, g, b, 0.5));
+            gc.fillRect(Math.random()*100, Math.random()*100, Math.random()*200, Math.random()*200 );
+        }
+        else if (figure==3)
+        {
+            gc.setStroke(color(r, g, b, 0.5));
+            gc.strokeRect(Math.random()*100, Math.random()*100, Math.random()*200, Math.random()*200 );
+        }
+        else if (figure==4)
+        {
+            gc.setFill(color(r, g, b, 0.5));
+            gc.fillPolygon(
+                    new double[]{Math.random()*100, Math.random()*100, Math.random()*100},
+                    new double[]{Math.random()*100, Math.random()*100, Math.random()*100},
+                    3
+            );
+        }
+        else if (figure==5)
+        {
+            gc.setStroke(color(r, g, b, 0.5));
+            gc.strokePolygon(
+                    new double[]{Math.random()*100, Math.random()*100, Math.random()*100},
+                    new double[]{Math.random()*100, Math.random()*100, Math.random()*100},
+                    3
+            );
+        }
+        else if (figure==6)
+        {
+            gc.setStroke(color(r, g, b, 0.5));
+            gc.strokeLine(Math.random() * 200, Math.random() * 100, Math.random() * 100, Math.random() * 100);
+        }
+    }
+}
