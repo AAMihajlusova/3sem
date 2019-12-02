@@ -1,0 +1,49 @@
+System.out.printf("%-4s|%-57s|%-11s|%-11s|%14s|%14s%n", " ", " ", " ", "кол-во","байт, размер", "бит,");
+        System.out.printf("%-4s|%-57s|%-11s|%-11s|%14s|%14s%n", " ", " ", "палиндром", "символов", "в программе","по Харли");
+        int Poli=0;
+        int Sy=0;
+        int By=0;
+        double Ha=0;
+        for (int i=0; i<13; i++)
+        {
+            System.out.println("---------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("%-4d|%-57s|%-11s|%-11d|%14s|%14.2f%n", i+1, str.get(i), Polindrom(str.get(i)), str.get(i).length(), Byte(str.get(i)),Hartli(str.get(i)));
+            if (Polindrom(str.get(i))=='+') Poli=Poli+1;
+            Sy=Sy+str.get(i).length();
+            By=By+Byte(str.get(i));
+            Ha=Ha+Hartli(str.get(i));
+        }
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-4s|%-57s|%-11s|%-11d|%14s|%14.2f%n", " ", "ИТОГО", Poli, Sy, By,Ha);
+    }
+
+    //полиндром
+    public static char Polindrom(String str) {
+        int N = str.length();
+        for (int j = 0; j < N/2; j++)
+            if(str.charAt(j)!=str.charAt(N-1-j))
+                return '-';
+            return '+';
+    }
+
+
+    //байт, размер в программе
+    public static int Byte(String str) {
+        int N =str.length()*2;
+        return N;
+    }
+
+    //бит, по Хартли
+    public static double Hartli(String str) {
+        int N = str.length();
+        ArrayList<Character> symb = new ArrayList<Character>();
+        mark:
+        for (int j = 0; j < N; j++) {
+            for (char buf : symb)
+                if (str.charAt(j) == buf)
+                    continue mark;
+            symb.add(str.charAt(j));
+            }
+            return N*Math.log(symb.size())/Math.log(2);
+        }
+    }
