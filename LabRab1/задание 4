@@ -1,0 +1,62 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import static java.lang.Math.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Fu[] Mas = new Fu[]{x -> 2 * sin(x) + 1, x -> (x / PI - 1) * (x / PI - 1), x -> -(x / PI) * (x / PI) - 2 * x + 5 * PI, x -> 0.5 * cos(x) * cos(x) + 1};
+        int N=0;
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Количество отрицательных значений для функции " + (i+1) + ":" + Tab(-2 * PI, 2 * PI, PI / 6, Mas[i]));
+            N=N+Tab(-2 * PI, 2 * PI, PI / 6, Mas[i]);
+        }
+        System.out.println("Количество отрицательных значений для всех функций:"+N);
+        System.out.println("Введите количество точек");
+        Scanner in= new Scanner(System.in);
+        int n= in.nextInt();
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Минимальное значение функции" + (i+1) + ":" + RandomMin(n, Mas[i]));
+            System.out.println("Минимальное значение функции" + (i+1) + ":" + RandomMax(n, Mas[i]));
+
+        }
+
+    }
+     public static int Tab (double a, double b, double dx, Fu Mas)
+     {
+         double[] Otvet= new double[(int)((b-a)/dx)];
+         int k=0;
+
+        for (int i=0;a<b; a+=dx, i++)
+        {
+            Otvet[i]= Mas.func(a);
+            if (Otvet[i]<0) k++;
+        }
+        return k;
+     }
+     public static double RandomMin(int n, Fu Mas)
+     {
+         double min=1000;
+         for (int i=0; i<n; i++)
+         {
+             double x=(Math.random()-0.5)*20;
+             if (min>Mas.func(x)) min=Mas.func(x);
+         }
+         return min;
+     }
+
+    public static double RandomMax(int n, Fu Mas)
+    {
+        double max=-1000;
+        for (int i=0; i<n; i++)
+        {
+            double x=(Math.random()-0.5)*20;
+            if (max<Mas.func(x)) max=Mas.func(x);
+        }
+        return max;
+    }
+
+    interface Fu{
+        double func(double x);
+    }
+}
