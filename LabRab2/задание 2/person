@@ -1,0 +1,22 @@
+public class Person {
+    String LastName;
+    String Name;
+    Integer Year;
+    String Sex;
+    public Person(String Inform )
+    {
+        String[] a=Inform.split(" ");
+        LastName=a[0];
+        Name=a[1];
+        Year=Integer.parseInt(a[2]);
+        Sex=a[3];
+    }
+    public Integer Age()
+    {
+        return 2019-Year;
+    }
+    public String Print()
+    {
+        return LastName+" "+Name+" "+Year+" "+Sex;
+    }
+}
