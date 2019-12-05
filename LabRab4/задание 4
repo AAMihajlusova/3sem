@@ -1,0 +1,19 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+	String str;
+	Scanner in= new Scanner(System.in);
+	System.out.println("Введите адрес:");
+	str=in.nextLine();
+	Pattern p = Pattern.compile("[a-f]{2}[:][a-f]{2}[:][a-f]{2}[:][0-9]{2}[:][0-9]{2}[:][0-9]{2}", CASE_INSENSITIVE);
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            System.out.println("Верный МАС-адрес.");
+        } else {
+            System.out.println("Адрес неверного формата.");
+    }
+}
+}
