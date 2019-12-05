@@ -1,0 +1,20 @@
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+	String str;
+	Scanner in= new Scanner(System.in);
+	System.out.println("Введите строку:");
+	str=in.nextLine();
+	Pattern p = Pattern.compile("[a-w]+\\@[a-w]+.[a-w]");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            System.out.println(" E-mail адрес");
+        } else {
+            System.out.println("Не E-mail адрес");
+        }
+}
+}
