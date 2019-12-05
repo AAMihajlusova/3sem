@@ -1,0 +1,128 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+public class Main {
+//пункт а
+    public static void main(String[] args) {
+        String str;
+        Scanner in= new Scanner(System.in);
+        System.out.println("Введите строку");
+        str= in.nextLine();
+        Pattern pattern = Pattern.compile("abcd111111102019");
+        Matcher matcher = pattern.matcher(str);
+        boolean found = matcher.matches();
+        if(found)
+            System.out.println("Совпадает");
+        else
+            System.out.println("Не совпадает");
+    }
+    
+//пункт б
+    public static void main(String[] args) {
+        int sum = 0;
+        int max = 0;
+        int i = 0;
+        String str;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите строку");
+        str = in.nextLine();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        Pattern pattern;
+        pattern = Pattern.compile("[0-9]+");
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            int a = Integer.parseInt(str.substring(matcher.start(), matcher.end()));
+            arrayList.add(a);
+            sum = sum + a;
+            if (a > max) {
+                max=a;
+                i = arrayList.size();
+            }
+        }
+        System.out.println("Полученые числа:" + arrayList + "\n" + "Их сумма:" + sum + "\n" + "Максимальное число:" + max + "\n" + "Его порядковый номер:" + i);
+    }
+    //пункт в
+    public static void main(String[] args) {
+        String str;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите строку");
+        str = in.nextLine();
+        ArrayList<Double> arrayList = new ArrayList<>();
+        Pattern pattern;
+        pattern = Pattern.compile("\\d+[.,]\\d+");
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            double a = Double.parseDouble(str.substring(matcher.start(), matcher.end()).replace(',', '.'));
+            arrayList.add(a);
+            }
+        System.out.println("Полученые числа:" + arrayList );
+    }
+    public class Main {
+//пункт г
+    public static void main(String[] args) {
+        String str;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите строку");
+        str = in.nextLine();
+        ArrayList<String> arrayList = new ArrayList<>();
+        Pattern pattern;
+        pattern = Pattern.compile("[a-zA-Z]|[А-Яа-я]{10}+");
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            System.out.println(str.replaceAll("([a-zA-Z]|[А-Яа-я]){10,}", "*"));
+        }
+    }
+        
+//пункт д
+    public static void main (String[] args){
+        String str;
+        Scanner in= new Scanner(System.in);
+        System.out.println("Введите строку");
+        str=in.nextLine();
+        Pattern pattern = Pattern.compile("[a-fA-F\\d]{8}-(([a-zA-Z]|[\\d]){4}-){3}[a-zA-Z\\d]{12}");
+        Matcher matcher= pattern.matcher(str);
+        boolean found = matcher.matches();
+        if (found)
+            System.out.println("Строка GUID");
+        else System.out.println("Строка не GUID");
+    }
+}
+    
+//пункт е
+
+    public static void main(String[] args) {
+        String str;
+        Scanner in=new Scanner(System.in);
+        System.out.println("Введите строку");
+        str=in.nextLine();
+        Pattern pattern= Pattern.compile("#[A-F\\d]{8}");
+        Matcher matcher= pattern.matcher(str);
+        boolean found = matcher.matches();
+        if (found) System.out.println("Является");
+        else System.out.println("Не является");
+    }
+//пункт ж
+    public static void main(String[] args) {
+        String str;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите строку");
+        str = in.nextLine();
+        String[] words = str.split(":*\\\\");
+        System.out.println("Папки:")
+        for (String word : words) {
+            System.out.println(word);
+        }
+    }
+//пункт з
+    public static void main(String[] args) {
+	String str;
+	Scanner in= new Scanner(System.in);
+	str=in.nextLine();
+	System.out.println("Введите строку");
+	Pattern pattern;
+	pattern=Pattern.compile("ик ");
+	Matcher matcher= pattern.matcher(str);
+	while (matcher.find()){
+		System.out.println(str.replaceAll("ик "," "));
+	}
+    }
