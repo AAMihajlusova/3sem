@@ -1,0 +1,18 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+	String str;
+	Scanner in= new Scanner(System.in);
+	System.out.println("Введите строку:");
+	str=in.nextLine();
+	Pattern pattern= Pattern.compile("[1-31]\\[1-12]\\[1600-9999]");
+	Matcher matcher= pattern.matcher(str);
+	boolean found= matcher.matches();
+	if (found)
+		System.out.println("Это дата");
+	else System.out.println("Это не дата");
+    }
+}
