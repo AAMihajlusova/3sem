@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Polyline implements Iterable<Point>{
+    ArrayList<Point> points;
+
+    Polyline(ArrayList<Point> points)
+    {
+        this.points=points;
+    }
+    public String toString()
+    {StringBuilder Buf= new StringBuilder();
+     for (int i=0; i<points.size(); i++)
+     {
+         Buf.append(points.get(i).Print()).append(" ");
+     }
+     return Buf.toString();
+    }
+    @Override
+    public Iterator<Point> iterator() {
+        return points.iterator();
+    }
+}
