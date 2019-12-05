@@ -1,0 +1,35 @@
+import java.util.ArrayDeque;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("Введите математическое выражение:");
+        Scanner in= new Scanner(System.in);
+        String Math= in.nextLine();
+        Stack<Character> stack = new Stack<>();
+        ArrayDeque<Integer> ochered = new ArrayDeque<Integer>();
+        for (int i = 0; i <Math.length(); i++)
+        {
+            if ((Math.charAt(i)=='{')||(Math.charAt(i)=='(')||(Math.charAt(i)=='['))
+            {
+                stack.push(Math.charAt(i));
+            }
+            else if (Math.charAt(i)=='}')
+            {
+                if (stack.peek()=='{') stack.pop();
+            }
+            else if (Math.charAt(i)==')')
+            {
+                if (stack.peek()=='(') stack.pop();
+            }
+            else if (Math.charAt(i)==']')
+            {
+                if (stack.peek()=='[') stack.pop();
+            }
+        }
+        if (stack.empty()) System.out.println("Балланс соблюден");
+        else System.out.println("Балланс не соблюден");
+    }
+}
