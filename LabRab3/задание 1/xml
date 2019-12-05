@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kniga>
+    <avtor avt="Пушкин А. С." >
+        <proisv title="Руслан и Людмила" stran="150">
+        </proisv>
+        <proisv title="Cказка о рыбаке и рыбке" stran="25">
+        </proisv>
+    </avtor>
+    <avtor avt="Толстой Л. Н." >
+        <proisv title="Война и мир" stran="1000">
+        </proisv>
+    </avtor>
+</kniga>
