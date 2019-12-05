@@ -1,0 +1,42 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Stack;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Stack<String> str1 = new Stack<String>();
+        ArrayDeque<String> str2 = new ArrayDeque<>();
+        try(FileReader fr = new FileReader("people.txt")) {
+            Scanner scan = new Scanner(fr);
+            String strbuf="";
+            while (scan.hasNextLine()) {
+                strbuf = scan.nextLine();
+                str1.add(strbuf);
+                str2.add(strbuf);
+            }
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        Person Chelovek;
+        System.out.println("Люди моложе 40");
+        while(!str1.empty())
+        {
+            Chelovek=new Person(str1.pop());
+            if (Chelovek.Age()<40) { System.out.println(Chelovek.Print());
+            }
+        }
+        System.out.println("Люди старше 40");
+        while(!str2.isEmpty())
+        {
+            Chelovek=new Person(str2.remove());
+            if (Chelovek.Age()>40) { System.out.println(Chelovek.Print());
+            }
+        }
+
+    }
+
+}
