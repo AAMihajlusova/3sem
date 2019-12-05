@@ -1,0 +1,39 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<String> str = new ArrayList<String>();
+        try(FileReader fr = new FileReader("text.txt")) {
+            int i = 0;
+            Scanner scan = new Scanner(fr);
+            while (scan.hasNext())
+                str.add(scan.nextLine());
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        str.sort(Comparator.comparingInt(s->s.length()));
+       for (String p: str)
+        System.out.println(p);
+        System.out.println("-----------------------------------------------------");
+        str.sort((s1,s2)->s1.compareTo(s2));
+        for (String a: str)
+            System.out.println(a);
+        str.sort(Comparator.comparingInt(s->{
+            int k=0;
+            for(int i=0;i<s.length();i++)
+                if (s.charAt(i)>='A' && s.charAt(i)<='Z')
+                    k++;
+                return -k;
+        }));
+        System.out.println("-----------------------------------------------------");
+        for (String p: str)
+            System.out.println(p);
+    }
+
+}
