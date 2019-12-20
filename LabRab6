@@ -1,0 +1,72 @@
+package sql.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class Main {
+
+    private static Connection connection;
+
+    public static void connection() {
+        try {
+            connection = DriverManager
+                    .getConnection("jdbc:postgresql://127.0.0.1:5432/Dannye", "postgres", "server23_S");
+        } catch (SQLException e) {
+            System.out.println("Connection Failed");
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws SQLException {
+        String Name;
+        String Land;
+        String City;
+        String Adres;
+        String Phone;
+        String Email;
+        addNote(7,"ООО Шуба", "Россия", "Чебоксары", "ул.Петрова, д.4", "237-89-08", "mex@mail.ru");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите данные: имя");
+        Name = in.nextLine();
+        System.out.println("Страна");
+        Land = in.nextLine();
+        System.out.println("Город");
+        City = in.nextLine();
+        System.out.println("Адрес");
+        Adres = in.nextLine();
+        System.out.println("Телефон");
+        Phone = in.nextLine();
+        System.out.println("Электронная почта");
+        Email = in.nextLine();
+        addNote(8, Name, Land, City, Adres, Phone, Email);
+        updateNote();
+        deleteNote();
+    }
+    private static void addNote(int id, String Name, String Land, String City, String Adres, String Phone, String Email) throws SQLException {
+        String insert = "INSERT INTO users(id, Имя, Страна, Город, Адрес, Телефон, Электронная_почта) VALUES(?,?,?,?,?,?,?)";
+        PreparedStatement PreSta = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/Dannye", "postgres", "server23_S").prepareStatement(insert);
+        PreSta.setInt(1, id);
+        PreSta.setString(2, Name);
+        PreSta.setString(3, Land);
+        PreSta.setString(4, City);
+        PreSta.setString(5, Adres);
+        PreSta.setString(6, Phone);
+        PreSta.setString(7, Email);
+        PreSta.executeUpdate();
+    }
+
+    private static void updateNote() throws SQLException{
+        String insert = "UPDATE users SET Имя='Институт ядерных технологий', Телефон='511-11-11' WHERE Имя='НИИ Атоммашстрой'";
+        PreparedStatement PreSta =DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/Dannye", "postgres", "server23_S").prepareStatement(insert);
+        PreSta.executeUpdate();
+    }
+
+    private static void deleteNote() throws SQLException{
+        String insert = "DELETE FROM users WHERE Имя='Левачев Н.Н.'";
+        PreparedStatement PreSta =DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/Dannye", "postgres", "server23_S").prepareStatement(insert);
+        PreSta.executeUpdate();
+    }
+}
